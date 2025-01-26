@@ -1,0 +1,14 @@
+load("/Users/wlomsi/Box Sync/4DV660/ISLR/data/Hitters.rda")
+hitters
+Hitters
+load("/Users/wlomsi/Box Sync/4DV660/ISLR/data/Hitters.rda")write.csv(matrix,file="mysavefile.csv")
+load("/Users/wlomsi/Box Sync/4DV660/ISLR/data/Hitters.rda")
+write.csv(Hitters,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Hitters.csv")
+load("/Users/wlomsi/Box Sync/4DV660/ISLR/data/Default.rda")
+write.csv(Default,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Default.csv")
+load("/Users/wlomsi/Box Sync/4DV660/ISLR/data/Wage.rda")
+> write.csv(Wage,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Wage.csv")
+> write.csv(Wage,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Wage.csv")
+> write.csv(Wage,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Wage.csv")
+Wage
+write.csv(Wage,file="/Users/wlomsi/Box Sync/4DV660/ISLR/data/Wage.csv")
