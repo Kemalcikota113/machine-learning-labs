@@ -6,7 +6,7 @@ import scipy.stats as stats
 import statsmodels.api as sm
 
 # load wage.csv
-wage = pd.read_csv('wage.csv')
+wage = pd.read_csv('Wage.csv')
 
 # Set pandas option to display all columns
 pd.set_option('display.max_columns', None)
