@@ -108,3 +108,64 @@ print(conf_age_medv, end="\n\n")
 # INTERPRETATION OF RESULTS GOES HERE (START OF PAGE 12)
 
 # HEADER: Use the simple linear regression models
+
+# Prediction interval for the model with lstat
+
+new_lstat = pd.DataFrame({'lstat': [5, 10, 15]})  # The three levels
+
+new_lstat_with_const = sm.add_constant(new_lstat)
+
+pred_lstat_medv = model_lstat_medv.get_prediction(new_lstat_with_const)
+pred_lstat_medv_summary = pred_lstat_medv.summary_frame(alpha=0.05)
+print("Prediction interval for lstat: ")
+print(pred_lstat_medv_summary, end="\n\n")
+
+# Prediction interval for the model with rm
+
+new_rm = pd.DataFrame({'rm': [5, 6.5, 8]})  # The three levels
+
+new_rm_with_const = sm.add_constant(new_rm)
+
+pred_rm_medv = model_rm_medv.get_prediction(new_rm_with_const)
+pred_rm_medv_summary = pred_rm_medv.summary_frame(alpha=0.05)
+print("Prediction interval for rm: ")
+print(pred_rm_medv_summary, end="\n\n")
+
+# Prediction interval for the model with age
+
+new_age = pd.DataFrame({'age': [25, 50, 75]})  # The three levels
+
+new_age_with_const = sm.add_constant(new_age)
+
+pred_age_medv = model_age_medv.get_prediction(new_age_with_const)
+pred_age_medv_summary = pred_age_medv.summary_frame(alpha=0.05)
+print("Prediction interval for age: ")
+print(pred_age_medv_summary, end="\n\n")
+
+# INTERPRETATION OF RESULTS GOES HERE (END OF PAGE 12)
+
+# HEADER: Perform multiple Linear Regression
+
+model_multivariate = sm.OLS(boston['medv'], sm.add_constant(boston[['lstat', 'rm', 'age']])).fit()
+
+residuals_model_multivariate = model_multivariate.resid
+print("Residuals: ", residuals_model_multivariate.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
+print(model_multivariate.summary())
+
+# INTERPRETATION OF RESULTS GOES HERE (PAGE 13)
+
+# Fit medv as response with all available predictors altogether
+
+model_all = sm.OLS(boston['medv'], sm.add_constant(boston.drop(columns=['medv']))).fit() # we can just drop the medv column
+residuals_model_all = model_all.resid
+print("Residuals: ", residuals_model_all.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
+print(model_all.summary())
+
+# INTERPRETATION OF RESULTS GOES HERE (PAGE 14)
+
+correlation_matrix = boston.corr()
+
+plt.figure(figsize=(10, 8))
+sns.heatmap(correlation_matrix, annot=True, cmap='coolwarm', center=0)
+plt.title("Correlation Matrix")
+plt.show()
