@@ -30,7 +30,7 @@ corCoef_medv_lstat, pValue_medv_rm = stats.pearsonr(boston['medv'], boston['rm']
 print("Correlation coefficient between medv and rm: ", corCoef_medv_lstat, ", with p-value: ", pValue_medv_rm)
 
 corCoef_medv_lstat, pValue_medv_age = stats.pearsonr(boston['medv'], boston['age'])
-print("Correlation coefficient between medv and age: ", corCoef_medv_lstat, ", with p-value: ", pValue_medv_age)
+print("Correlation coefficient between medv and age: ", corCoef_medv_lstat, ", with p-value: ", pValue_medv_age, end="\n\n")
 
 # Scatter plot with regression line between lstat and medv
 sns.regplot(x=boston['lstat'], y=boston['medv'],  line_kws={'color': 'black'})
@@ -48,7 +48,7 @@ sns.regplot(x=boston['rm'], y=boston['medv'],  line_kws={'color': 'black'})
 plt.xlabel("average number of rooms per house")
 plt.ylabel("median house value")
 plt.title(f"Scatter Plot with Regression Line")
-plt.show() # Remember to make the window bigger to see the plot
+plt.show()
 
 # Scatter plot with regression line between age and medv
 sns.regplot(x=boston['age'], y=boston['medv'],  line_kws={'color': 'black'})
@@ -57,4 +57,27 @@ sns.regplot(x=boston['age'], y=boston['medv'],  line_kws={'color': 'black'})
 plt.xlabel("average age of houses")
 plt.ylabel("median house value")
 plt.title(f"Scatter Plot with Regression Line")
-plt.show() # Remember to make the window bigger to see the plot
+plt.show()
+
+
+model_lstat_medv = sm.OLS(boston['medv'], sm.add_constant(boston['lstat'])).fit()
+residuals_model_lstat_medv = model_lstat_medv.resid
+
+print("Residuals: ", residuals_model_lstat_medv.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
+print(model_lstat_medv.summary())
+
+
+
+model_rm_medv = sm.OLS(boston['medv'], sm.add_constant(boston['rm'])).fit()
+residuals_model_rm_medv = model_rm_medv.resid
+
+print("Residuals: ", residuals_model_rm_medv.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
+print(model_rm_medv.summary())
+
+
+
+model_age_medv = sm.OLS(boston['medv'], sm.add_constant(boston['age'])).fit()
+residuals_model_age_medv = model_age_medv.resid
+
+print("Residuals: ", residuals_model_age_medv.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
+print(model_age_medv.summary())
