@@ -81,3 +81,30 @@ residuals_model_age_medv = model_age_medv.resid
 
 print("Residuals: ", residuals_model_age_medv.describe(), end="\n\n") # we need to add this because sm.OLS doesent include the residuals in the summary
 print(model_age_medv.summary())
+
+# INTERPRETATION OF RESULTS GOES HERE (PAGE 11)
+
+# Confidence intervals for the coefficients from the model with lstat
+conf_lstat_medv = model_lstat_medv.conf_int()
+conf_lstat_medv.columns = ['2.5%', '97.5%'] # trying to make it look like the example by adding labels
+conf_lstat_medv.index = ['(Intercept)', 'lstat']
+print("Confidence interval for lstat: ")
+print(conf_lstat_medv, end="\n\n")
+
+# Confidence intervals for the coefficients from the model with rm
+conf_rm_medv = model_rm_medv.conf_int()
+conf_rm_medv.columns = ['2.5%', '97.5%'] # trying to make it look like the example by adding labels
+conf_rm_medv.index = ['(Intercept)', 'rm']
+print("Confidence interval for rm: ")
+print(conf_rm_medv, end="\n\n")
+
+# Confidence intervals for the coefficients from the model with age
+conf_age_medv = model_age_medv.conf_int()
+conf_age_medv.columns = ['2.5%', '97.5%'] # trying to make it look like the example by adding labels
+conf_age_medv.index = ['(Intercept)', 'age']
+print("Confidence interval for age: ")
+print(conf_age_medv, end="\n\n")
+
+# INTERPRETATION OF RESULTS GOES HERE (START OF PAGE 12)
+
+# HEADER: Use the simple linear regression models
